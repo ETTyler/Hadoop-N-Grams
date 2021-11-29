@@ -80,6 +80,18 @@ public class Ngram {
         Configuration conf = new Configuration();
         conf.set("n", args[2]);
         conf.set("mapreduce.output.textoutputformat.separator", " ");
+        conf.set("io.sort.mb", "912");
+        conf.set("io.sort.spill.percent", "0.47");
+        conf.set("shuffle.input.buffer.percent", "0.37");
+        conf.set("io.sort.factor", "5");
+        conf.set("shuffle.merge.percent", "0.33");
+        conf.set("inmem.merge.threshold", "200");
+        conf.set("reduce.input.buffer.percent", "0.0");
+        conf.set("io.sort.record.percent", "0.2");
+        conf.set("mapred.compress.map.output", "false");
+        conf.set("mapred.output.compress", "false");
+        conf.set("reduce.slowstart.completedmaps", "0.4");
+        conf.set("mapreduce.job.jvm.numtasks", "21");
         Job job = Job.getInstance(conf, "Ngrams");
         job.setJarByClass(Ngram.class);
         job.setMapperClass(NGMapper.class);
